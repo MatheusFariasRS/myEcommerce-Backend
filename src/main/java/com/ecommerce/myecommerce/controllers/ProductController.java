@@ -1,16 +1,16 @@
 package com.ecommerce.myecommerce.controllers;
 
 import com.ecommerce.myecommerce.dto.ProductDTO;
-import com.ecommerce.myecommerce.entities.Product;
-import com.ecommerce.myecommerce.repositories.ProductRepository;
 import com.ecommerce.myecommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -25,5 +25,10 @@ public class ProductController {
         ProductDTO dto = service.findById(id);
         return dto;*/
         return service.findById(id);
+    }
+
+    @GetMapping
+    public Page<ProductDTO> findAll(Pageable pageable){
+        return service.findAll(pageable);
     }
 }
