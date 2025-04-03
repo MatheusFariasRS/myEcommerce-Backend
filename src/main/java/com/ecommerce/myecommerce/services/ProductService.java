@@ -3,6 +3,7 @@ package com.ecommerce.myecommerce.services;
 import com.ecommerce.myecommerce.dto.ProductDTO;
 import com.ecommerce.myecommerce.entities.Product;
 import com.ecommerce.myecommerce.repositories.ProductRepository;
+import com.ecommerce.myecommerce.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,8 @@ public class ProductService {
         ProductDTO dto = new ProductDTO(product);
         return dto;
         */
-         Product product = repository.findById(id).get();
+         Product product = repository.findById(id).orElseThrow(
+                 ()-> new ResourceNotFoundException("Recurso não encontrado"));
          return new ProductDTO(product);
     }
 
