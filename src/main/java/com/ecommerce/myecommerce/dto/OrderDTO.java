@@ -3,6 +3,7 @@ package com.ecommerce.myecommerce.dto;
 import com.ecommerce.myecommerce.entities.Order;
 import com.ecommerce.myecommerce.entities.OrderItem;
 import com.ecommerce.myecommerce.entities.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class OrderDTO {
 
     private PaymentDTO payment;
 
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment) {
